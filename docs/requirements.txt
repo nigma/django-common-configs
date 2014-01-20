@@ -2,3 +2,5 @@ django==1.6.1
 django-configurations==0.7
 six==1.5.2
 dj_database_url
+boto
+django-storages
