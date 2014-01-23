@@ -9,11 +9,20 @@ DjangoSecurity
 
 .. automodule:: common_configs.django.security
 
+DjangoSecurity
+--------------
+
 .. autoclass:: DjangoSecurity
    :members:
 
+DjangoSSLSecurity
+-----------------
+
 .. autoclass:: DjangoSSLSecurity
    :members:
+
+MozillaCSP
+----------
 
 .. autoclass:: MozillaCSP
    :members:

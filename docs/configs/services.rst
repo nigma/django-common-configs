@@ -12,7 +12,7 @@ Amazon AWS settings
 .. automodule:: common_configs.services.aws
 
 AWS
--------
+---
 
 .. autoclass:: AWS
    :members:
