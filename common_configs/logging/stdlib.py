@@ -148,9 +148,9 @@ class Logging(object):
                 "propagate": False
             },
             "django.request": {
-                "handlers": handlers + ["mail_admins"],
+                "handlers": ["mail_admins"],
                 "level": "ERROR",
-                "propagate": False
+                "propagate": True
             },
             "django.db.backends": {
                 "level": "ERROR",
@@ -158,9 +158,9 @@ class Logging(object):
                 "propagate": False
             },
             "django.commands": {
-                "handlers": handlers + ["mail_admins"],
+                "handlers": ["mail_admins"],
                 "level": "ERROR",
-                "propagate": False
+                "propagate": True
             },
             "django.security.DisallowedHost": {
                 "handlers": [],
@@ -179,6 +179,11 @@ class Logging(object):
             "requests": {
                 "handlers": handlers,
                 "level": "WARNING",
+                "propagate": False
+            },
+            "oauthlib": {
+                "handlers": handlers,
+                "level": "INFO",
                 "propagate": False
             },
             "raven": {
