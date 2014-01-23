@@ -2,10 +2,10 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from configurations import Configuration, values
+from configurations import Configuration as _Configuration, values
 
 
-class BaseConfig(Configuration):
+class Configuration(_Configuration):
 
     @property
     def INSTALLED_APPS(self):

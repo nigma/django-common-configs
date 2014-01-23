@@ -6,6 +6,8 @@ import os
 
 __version__ = "0.1.0.dev1"
 
+from .base import Configuration, values
+
 undefined = object()
 
 
