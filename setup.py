@@ -38,7 +38,9 @@ setup(
         "django-configurations>=0.7"
     ],
     extras_require={
+        "auth": ["django-allauth>=0.15.0"],
         "compress": ["django_compressor>=1.3"],
+        "debug": ["django-debug-toolbar>=1.0.1"],
         "forms": ["django-crispy-forms>=1.4.0"],
         "heroku": [
             "django-pylibmc-sasl>=0.2.4",
@@ -49,11 +51,12 @@ setup(
         "sentry": ["raven>=4.0.3"],
         "storage": [
             "boto>=2.23.0",
-            "django-storages>=1.1.8"
+            "django-storages>=1.1.8",
+            "Collectfast>=0.1.13"
         ],
         "logging": ["django-log-request-id>=0.0.3"],
         "structlog": ["structlog>=0.4.1", "django-log-request-id>=0.0.3"],
-        "security": ["django-secure>=1.0"],
+        "security": ["django-secure>=1.0", "django_csp>=2.0.3"],
         "twilio": ["twilio"]
     },
     zip_safe=False,

@@ -50,8 +50,7 @@ Configuration classes and override base settings as necessary:
 
 .. code-block:: py
 
-    from configurations import values
-    from common_configs.base import BaseConfig
+    from common_configs import Configuration, values
 
     from common_configs.django import Locale, SingleSite, DjangoSecurity
     from common_configs.apps import CrispyForms, Imagekit, CeleryDev, CompressDev, CompressProd
@@ -63,7 +62,7 @@ Configuration classes and override base settings as necessary:
 
     class Common(Locale, SingleSite,
                  CrispyForms, Imagekit, APNS, GCM,
-                 BaseConfig):
+                 Configuration):
 
         DEBUG = False
         TEMPLATE_DEBUG = False
@@ -94,13 +93,15 @@ Dependencies
 =============== ======================================================================================================
 Module              Requirements
 =============== ======================================================================================================
-security        ``django-secure>=1.0``
+security        ``django-secure>=1.0``, ``django_csp>=2.0.3``
 compress        ``django_compressor>=1.3``
+debug           ``django-debug-toolbar>=1.0.1``
+auth            ``django-allauth>=0.15.0``
 forms           ``django-crispy-forms>=1.4.0``
 imagekit        ``django-imagekit>=3.2``
 pusher          ``pusher>=0.8``
 sentry          ``raven>=4.0.3``
-storage         ``boto>=2.23.0``, ``django-storages>=1.1.8``
+storage         ``boto>=2.23.0``, ``django-storages>=1.1.8``, ``Collectfast>=0.1.13``
 logging         ``django-log-request-id>=0.0.3``
 structlog       ``structlog>=0.4.1``, ``django-log-request-id>=0.0.3``
 twilio          ``twilio``
@@ -109,13 +110,13 @@ heroku          ``django-pylibmc-sasl>=0.2.4``, ``django-heroku-memcacheify>=0.4
 
 All dependencies can be easily added to your ``requirements.txt`` file by specifying it using pip syntax::
 
-    django-common-configs[security,compress,forms,imagekit,pusher,sentry,storage,structlog,twilio,heroku]==0.1.0
+    django-common-configs[security,compress,debug,auth,forms,imagekit,pusher,sentry,storage,structlog,twilio,heroku]==0.1.0
 
 
 License
 -------
 
-`django-common-configs` is released under the BSD license.
+``django-common-configs`` is released under the BSD license.
 
 Other Resources
 ---------------
