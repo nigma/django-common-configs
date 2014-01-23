@@ -10,6 +10,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from configurations import values
 
+from ..utils import merge_items
+
 
 class CompressBase(object):
 
@@ -50,6 +52,15 @@ class CompressBase(object):
 
     #: http://django-compressor.rtfd.org/latest/settings/#django.conf.settings.COMPRESS_CACHE_BACKEND
     COMPRESS_CACHE_BACKEND = values.Value("locmem")
+
+    @property
+    def INSTALLED_APPS(self):
+        """
+        Appends :mod:`compressor` to list of ``INSTALLED_APPS``.
+        """
+        return merge_items(super(CompressBase, self).INSTALLED_APPS, [
+            "compressor",
+        ])
 
 
 class CompressProd(CompressBase):

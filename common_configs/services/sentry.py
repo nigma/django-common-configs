@@ -8,6 +8,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from configurations import values
 
+from ..utils import merge_items
+
 
 class RavenDSNValue(values.SecretValue):
 
@@ -33,9 +35,9 @@ class Raven(object):
         Appends :class:`raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware`
         to list of ``MIDDLEWARE_CLASSES``.
         """
-        return super(Raven, self).MIDDLEWARE_CLASSES + [
+        return merge_items(super(Raven, self).MIDDLEWARE_CLASSES, [
             "raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware"
-        ]
+        ])
 
     @property
     def INSTALLED_APPS(self):
@@ -43,6 +45,6 @@ class Raven(object):
         Appends :mod:`raven.contrib.django.raven_compat`
         to list of ``INSTALLED_APPS``.
         """
-        return super(Raven, self).INSTALLED_APPS + [
+        return merge_items(super(Raven, self).INSTALLED_APPS + [
             "raven.contrib.django.raven_compat",
-        ]
+        ])

@@ -10,6 +10,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from configurations import values
 
+from ..utils import merge_items
+
 
 class Imagekit(object):
 
@@ -22,3 +24,12 @@ class Imagekit(object):
     #:
     #: http://django-imagekit.rtfd.org/latest/configuration.html#django.conf.settings.IMAGEKIT_SPEC_CACHEFILE_NAMER
     IMAGEKIT_SPEC_CACHEFILE_NAMER = values.Value("imagekit.cachefiles.namers.source_name_dot_hash", environ_prefix=None)
+
+    @property
+    def INSTALLED_APPS(self):
+        """
+        Appends :mod:`imagekit` to list of ``INSTALLED_APPS``.
+        """
+        return merge_items(super(Imagekit, self).INSTALLED_APPS, [
+            "imagekit",
+        ])

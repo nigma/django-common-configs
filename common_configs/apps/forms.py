@@ -10,6 +10,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from configurations.values import BooleanValue, Value
 
+from ..utils import merge_items
+
 
 class CrispyForms(object):
 
@@ -18,3 +20,12 @@ class CrispyForms(object):
 
     #: Don't suppress errors unless explicitly set
     CRISPY_FAIL_SILENTLY = BooleanValue(False)
+
+    @property
+    def INSTALLED_APPS(self):
+        """
+        Appends :mod:`crispy_forms` to list of ``INSTALLED_APPS``.
+        """
+        return merge_items(super(CrispyForms, self).INSTALLED_APPS, [
+            "crispy_forms",
+        ])
