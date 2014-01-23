@@ -50,7 +50,8 @@ Configuration classes and override base settings as necessary:
 
 .. code-block:: py
 
-    from configurations import Configuration, values
+    from configurations import values
+    from common_configs.base import BaseConfig
 
     from common_configs.django import Locale, SingleSite, DjangoSecurity
     from common_configs.apps import CrispyForms, Imagekit, CeleryDev, CompressDev, CompressProd
@@ -62,7 +63,7 @@ Configuration classes and override base settings as necessary:
 
     class Common(Locale, SingleSite,
                  CrispyForms, Imagekit, APNS, GCM,
-                 Configuration):
+                 BaseConfig):
 
         DEBUG = False
         TEMPLATE_DEBUG = False
