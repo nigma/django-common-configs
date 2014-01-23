@@ -6,3 +6,4 @@ from .celery import CeleryBase, CeleryDev
 from .compress import CompressBase, CompressDev, CompressProd
 from .forms import CrispyForms
 from .imagekit import Imagekit
+from .auth import DjangoAuth, AllAuth
