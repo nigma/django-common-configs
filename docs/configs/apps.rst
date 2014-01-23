@@ -51,6 +51,35 @@ CompressDev
    :show-inheritance:
 
 
+Django Debug Toolbar
+====================
+
+DebugToolbar
+------------
+
+.. automodule:: common_configs.apps.debugtoolbar
+   :members:
+
+
+Auth
+====
+
+.. automodule:: common_configs.apps.auth
+
+DjangoAuth
+----------
+
+.. autoclass:: DjangoAuth
+   :members:
+
+AllAuth
+-------
+
+.. autoclass:: AllAuth
+   :members:
+   :show-inheritance:
+
+
 Django Crispy Forms
 ===================
 
