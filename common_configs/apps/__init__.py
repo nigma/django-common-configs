@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from .celery import CeleryBase, CeleryDev
 from .compress import CompressBase, CompressDev, CompressProd
+from .debugtoolbar import DebugToolbar
 from .forms import CrispyForms
 from .imagekit import Imagekit
 from .auth import DjangoAuth, AllAuth
