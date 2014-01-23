@@ -12,6 +12,7 @@ from django.utils.http import http_date
 from configurations import values
 
 from ..services.aws import AWS
+from ..utils import merge_items
 
 
 class SimpleStorage(object):
@@ -21,32 +22,6 @@ class SimpleStorage(object):
 
     STATIC_URL = "/static/"
     MEDIA_URL = "/media/"
-
-    @property
-    def STATICFILES_DIRS(self):
-        """
-        Set ``STATICFILES_DIRS`` setting in your main config file
-        """
-        # [
-        #     rel("static"),
-        # ]
-        raise NotImplementedError
-
-    @property
-    def STATIC_ROOT(self):
-        """
-        Set ``STATIC_ROOT`` setting in your main config file
-        """
-        # rel("..", "media")
-        raise NotImplementedError
-
-    @property
-    def MEDIA_ROOT(self):
-        """
-        Set ``MEDIA_ROOT`` setting in your main config file
-        """
-        # rel("..", "media")
-        raise NotImplementedError
 
 
 class BaseCompressStorage(SimpleStorage):
@@ -112,7 +87,7 @@ class AWSCompressStorage(AWS, BaseCompressStorage):
     AWS_IS_GZIPPED = values.BooleanValue(False, environ_prefix=None)
 
     #: Preload S3 metadata
-    AWS_PRELOAD_METADATA = values.BooleanValue(False, environ_prefix=None)
+    AWS_PRELOAD_METADATA = values.BooleanValue(True, environ_prefix=None)
 
     #: Compressable content types (if ``AWS_IS_GZIPPED`` flag is set)
     GZIP_CONTENT_TYPES = values.TupleValue((
@@ -133,12 +108,13 @@ class AWSCompressStorage(AWS, BaseCompressStorage):
     def AWS_HEADERS(self):
         """
         Defines far-future expires (2020-12-31) and cache
-        control (``public, max-age=604800``) headers for served files.
+        control (``public, max-age=604800, must-revalidate``) headers for served files.
         """
+        max_age_days = 7
         return {
             "Expires": http_date(
                 time.mktime((datetime.datetime(2020, 12, 31)).timetuple())),
-            "Cache-Control": "public, max-age=%d" % (7 * 24 * 60 * 60),
+            "Cache-Control": "public, max-age=%d, must-revalidate" % (max_age_days * 24 * 60 * 60),
         }
 
     def get_aws_url(self, path, bucket, calling_format, secure, host="s3.amazonaws.com"):
@@ -169,3 +145,12 @@ class AWSCompressStorage(AWS, BaseCompressStorage):
             "media", bucket=self.AWS_STORAGE_BUCKET_NAME,
             calling_format=self.AWS_S3_CALLING_FORMAT, secure=self.AWS_S3_SECURE_URLS
         )
+
+    @property
+    def INSTALLED_APPS(self):
+        """
+        Appends :mod:`collectfast` to list of ``INSTALLED_APPS``.
+        """
+        return merge_items(super(AWSCompressStorage, self).INSTALLED_APPS, [
+            "collectfast"
+        ])
