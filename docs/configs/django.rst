@@ -12,6 +12,13 @@ DjangoSecurity
 .. autoclass:: DjangoSecurity
    :members:
 
+.. autoclass:: DjangoSSLSecurity
+   :members:
+
+.. autoclass:: MozillaCSP
+   :members:
+
+
 SingleSite
 ==========
 
