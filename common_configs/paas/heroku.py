@@ -52,6 +52,9 @@ class Heroku(MemcacheHeroku, PostgresHeroku, AWSCompressStorage):
     #: `Django settings docs <https://docs.djangoproject.com/en/1.6/ref/settings/#secure-proxy-ssl-header>`_.
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+    #: Request Id header
+    LOG_REQUEST_ID_HEADER = "HTTP_HEROKU_REQUEST_ID"
+
 
 class CeleryHerokuBigWig(CeleryBase):
 
